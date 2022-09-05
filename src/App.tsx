@@ -36,12 +36,27 @@ import '@aws-amplify/ui-react/styles.css';
 /* Theme variables */
 import './theme/variables.css';
 
-import  { Amplify, Auth } from 'aws-amplify'
+import  { Amplify, API, Auth, graphqlOperation } from 'aws-amplify'
 import { Authenticator } from '@aws-amplify/ui-react'
 import awsconfig from './aws-exports'
+import { createTodo } from './graphql/mutations';
 Amplify.configure(awsconfig)
 
 setupIonicReact();
+
+const todo = { name: 'test1', description: 'testtest'}
+
+const addItem = async () => {
+  try {
+    await API.graphql(graphqlOperation(createTodo, {input: todo}))
+    console.log('ok')
+  } catch (error) {
+    console.log(error)    
+  }
+
+  
+}
+
 
 const App: React.FC = () => (
   <Authenticator>
@@ -78,8 +93,9 @@ const App: React.FC = () => (
             </IonTabButton>
           </IonTabBar>
         </IonTabs>
-      </IonReactRouter>
+      <IonButton onClick={addItem}>addItem</IonButton>
       <IonButton onClick={signOut}>Sign out</IonButton>
+      </IonReactRouter>
     </IonApp>
     )}
   </Authenticator>
