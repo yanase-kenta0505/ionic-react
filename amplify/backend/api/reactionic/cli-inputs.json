@@ -4,7 +4,12 @@
     "apiName": "reactionic",
     "serviceName": "AppSync",
     "defaultAuthType": {
-      "mode": "AWS_IAM"
-    }
+      "mode": "API_KEY",
+      "expirationTime": 7,
+      "apiKeyExpirationDate": "2022-09-12T09:30:24.578Z",
+      "keyDescription": ""
+    },
+    "conflictResolution": {},
+    "additionalAuthTypes": []
   }
 }
